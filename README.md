@@ -1,132 +1,54 @@
-# KVM-Card-Mini
+# KVM over USB (Q0.5)
 
 ⌨️🖥️🖱️
 
-Simple KVM Console to USB 
+分享一个低门槛的KVM over USB方案
 
-[ENGLISH Version](https://github.com/Jackadminx/KVM-Card-Mini/blob/main/README-en.md)
+## 简介
 
-一款即插即用的 KVM （Keyboard Video Mouse）设备控制卡
+[Jackadminx](https://github.com/Jackadminx)/[KVM-Card-Mini](https://github.com/Jackadminx/KVM-Card-Mini) 已经完整了实现KVM over USB
+[ElluIFX](https://github.com/ElluIFX)/[KVM-Card-Mini-PySide6](https://github.com/ElluIFX/KVM-Card-Mini-PySide6) 又优化的软件把用户体验提供了一级。
+但是 制作硬件的门槛把很多人挡在来门外。
+这时候有一个公司发布了一款产品， [贝锐向日葵 Q0.5](https://sunlogin.oray.com/hardware/Q0.5), 一下子把门槛降低了，不用打板，不用焊接，不用打印外壳，甚至在促销的时候价格不到80元。
+我就把这些东西放在一个，提供一个DIY的思路。
 
-![Sketch](./Document/Images/Sketch.png)
+## 硬件
 
-## 功能特点
+向日葵Q0.5产品包含了一个塑料盒子【内有一个块板子】，还有一个双头的USB-C线。用户需要自己转变一根HDMI线和USB-C线。
+![产品正面](./Document/Images/Q05_front.JPG)    ![PCB背面](./Document/Images/Q05_back.jpg)
 
-- HID 协议传输，免驱动，支持USB FS传输速度
-- 支持 BIOS 键盘控制
-- 上位机程序兼容非板载视频采集卡
-- 板载 USB HUB 芯片，减少接口数量
-- MCU 双 USB Device 控制器，降低传输延迟
-- 板载蓝牙天线、调试接口，可用于MCU开发
-- USB 设备主从切换
+观察这款设备的PCB，所用芯片几乎和KVM-Card-Mini HV2.6一样，除了把MS2109换成了MS2131。模拟HID设备的MCU同样使用了CH582F，这样给了一种可能，是不是可以刷 KVM-Card-Mini的固件实现向日葵软件限制的功能，比如限制录屏。
+![PCB正面](./Document/Images/PCB1.JPG)    ![PCB背面](./Document/Images/PCB2.JPG)
 
-[演示视频](https://www.bilibili.com/video/BV1Mh4y1o7ya)
+### CH582固件刷入
 
-## 硬件分析
+####【刷机后不可以恢复向日葵原始固件，不可恢复！不可恢复！不可恢复！】
 
-![PCB](./Document/Images/PCB2.jpg)
+用MCU公司的工具直接刷。 [下载刷固件工具](https://www.wch.cn/downloads/WCHISPTool_Setup_exe.html) 
 
-1. **（控制端）USB Host Type-C 接口，连接至上位机**
-2. **（被控端）USB Host Type-C 接口，连接至被控端，控制键盘鼠标**
-3. **（被控端）标准 HDMI 视频输入接口，连接至被控端视频输出**
-4. 蓝牙陶瓷天线（~能用但不完全能用，没有做阻抗匹配~；可选安装元器件）
-5. EEPROM 支持烧录夹烧录
-6. CH582F 调试接口，只支持 WCH-Link （可选安装元器件）
-7. CH582F 
-8. MS2109
-9. CH582F 复位按钮
-10. CH582F USB 烧录选择按钮
-11. WS2812B（可选安装元器件）
-12. SL2.1s
-13. HDMI ESD防护（可选安装元器件）
+![刷固件工具](./Document/Images/03.jpg)
 
-## 上位机（控制端）
+一步一步来：
+1，打开刷机软件，选择CH58x系列
+2，按住pcb上的boot按钮（板子上只有一个按钮），然后“主控usb3.0”这个端口连接到电脑上，上电，松开boot按钮。这是时候刷机软件会自动找到CH582。
+3，设备列表自动显示设备型号。
+4，目标程序文件1，打开下载的固件 “CH582_Firmware.hex”
+5，点击下载。 右侧下载记录会显示过程，一眨眼功夫就完成了。
+（6,两线调试仿真不需要。） 
+最后需要reset一下，应用程序里面 重载MCU。
 
-![01](./Document/Images/01.png)
+## 软件
 
-![02](./Document/Images/02.png)
+刷好CH582F MCU固件之后，可以直接用 [KVM-Card-Mini](https://github.com/Jackadminx/KVM-Card-Mini) 或者 [KVM-Card-Mini-PySide6](https://github.com/ElluIFX/KVM-Card-Mini-PySide6) 发布的client应用程序，当然，[Web应用](https://webclient.0x8991.com/) 也是可以直接用的。
 
-- 屏幕显示：支持视频输入选择、切换输出分辨率
-- 键盘控制：支持自定义快捷键、6键无冲突
-- 鼠标控制：绝对鼠标模式
-- 键盘指示灯显示
-- 重置 MCU 和重置 HID 连接功能
-- 批量文本输入
-- ~~全键无冲突~~ 
-- 最大 1000hz 鼠标回报率
-- 屏幕截图
+## 已知问题
 
-开发中：
-- USB 切换选择、自动切换
-- USB HID 电源键功能
-
-### Web Version(alpha)
-[演示地址](https://webclient.0x8991.com/)
-
-![02](./Document/Images/web_ver3.png)
-
-## 固件刷入
-
-### CH582
-
-按住 BOOT 键同时使用USB数据线连接至电脑，然后使用 [WCHISPTool](https://www.wch.cn/downloads/WCHISPTool_Setup_exe.html) 刷入固件
-![03](./Document/Images/03.jpg)
-
-若不使用调试接口，则不需要开启两线仿真接口，即步骤6
-
-### MS2109
-
-配套的AT24C16 EEPROM可以直接买套片，或者用EEPROM编程器烧录。
-可以使用烧录夹在板子断电状态进行烧录。
-
-![04](./Document/Images/04.jpg)
-
-MS2109的固件来自 [Yuzuki HCC HDMI](https://oshwhub.com/gloomyghost/yuzuki-hcc) 项目，可通过HEX文件编辑器编辑固件实现修改设备名。
-
-## 实物图
-
-![IMG_2](./Document/Images/IMG_2.jpg)
-
-HV2.0
-
-*嘉立创彩色丝印版本
-
-
-
-![kv2.6](./Document/Images/kv2.6.jpeg)
-
-HV2.6
-
-添加USB切换接口
-
-![kv3.2](./Document/Images/kvmcard-grey.png)
-
-HV3.2 (开发中)
-
+1，原来向日葵的LED灯的设置和逻辑都没有了，刷机后，LED能量，RGB不停换，乱跳
+2，键盘不能输入ctrl+alt+del，可以在菜单里面选择自定义快捷键。可以保存下来。快捷键中原有的ctrl+alt+del不能用
+3，相对鼠标模式 不能用
+4，在连接软件之后，我的键盘caps lock灯不受控了，但功能正常
 
 ## 感谢
 
-https://oshwhub.com/gloomyghost/yuzuki-hcc
-
-https://materialdesignicons.com/icon/
-
-https://www.riverbankcomputing.com/software/pyqt/
-
-https://github.com/apmorton/pyhidapi
-
-https://www.mounriver.com/
-
-https://pro.lceda.cn/editor
-
-和其他开源或免费项目
-
-感谢 @ElluIFX 同学的制作的增强型客户端：
-https://github.com/ElluIFX/KVM-Card-Mini-PySide6
-
-
-
-## [License](https://github.com/Jackadminx/KVM-Card-Mini/blob/main/LICENSE)
-
-The MIT License (MIT)
-
-Copyright (c) 2023-2024 Jancgk
+感谢 [Jackadminx](https://github.com/Jackadminx) 和 [ElluIFX](https://github.com/ElluIFX)，希望可以继续优化设计，改进应用。
+当然，也感谢贝锐把设计商业化，提供高质量的产品，也希望在后面产品迭代的时，不要隔离原有项目，这样，用我们这些用户可以有一定的可玩空间。
