@@ -26,6 +26,7 @@
 
 ```diff
 - ** 【刷机后不可以恢复向日葵原始固件，不可恢复！不可恢复！不可恢复！】**
+```
 
 用MCU公司的工具直接刷。 [下载刷固件工具](https://www.wch.cn/downloads/WCHISPTool_Setup_exe.html) 
 
