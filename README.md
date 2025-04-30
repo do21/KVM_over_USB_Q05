@@ -43,7 +43,8 @@
 
 3，设备列表自动显示设备型号。
 
-4，目标程序文件1，打开下载的固件 “CH582_Firmware.hex”
+4，目标程序文件1，打开下载的固件 “Firmware.hex”
+
 【最新版本固件，Firmware.hex， https://github.com/ElluIFX/KVM-Card-Mini-PySide6/releases/tag/1.3】
 
 5，点击下载。 右侧下载记录会显示过程，一眨眼功夫就完成了。
