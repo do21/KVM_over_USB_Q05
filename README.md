@@ -44,6 +44,7 @@
 3，设备列表自动显示设备型号。
 
 4，目标程序文件1，打开下载的固件 “CH582_Firmware.hex”
+【最新版本固件，Firmware.hex， https://github.com/ElluIFX/KVM-Card-Mini-PySide6/releases/tag/1.3】
 
 5，点击下载。 右侧下载记录会显示过程，一眨眼功夫就完成了。
 
@@ -57,11 +58,13 @@
 
 ## 已知问题
 
-1，原来向日葵的LED灯的设置和逻辑都没有了，刷机后，LED能量，RGB不停换，乱跳
+~~1，原来向日葵的LED灯的设置和逻辑都没有了，刷机后，LED能量，RGB不停换，乱跳 ~~
+【刷了新固件，版本1.3之后LED灯不乱跳了。https://github.com/ElluIFX/KVM-Card-Mini-PySide6/releases/tag/1.3】
 
 2，键盘不能输入ctrl+alt+del，可以在菜单里面选择自定义快捷键。可以保存下来。快捷键中原有的ctrl+alt+del不能用
 
-3，相对鼠标模式 不能用
+~~3，相对鼠标模式 不能用 ~~
+【刷了新固件，版本1.3之后问题解决了】
 
 4，在连接软件之后，我的键盘caps lock灯不受控了，但功能正常
 
