@@ -25,6 +25,9 @@
 观察这款设备的PCB，除了把MS2109换成了MS2131，其他所用芯片和KVM-Card-Mini HV2.6一样。模拟HID设备的MCU同样使用了CH582F，这样给了一种可能，是不是可以刷 KVM-Card-Mini的固件实现向日葵软件没有的功能，比如抓屏。
 ![PCB正面](./Document/Images/PCB1.JPG)    ![PCB背面](./Document/Images/PCB2.JPG)
 
+向日葵Q0.5没有用一颗螺丝，底部的上面有8个卡扣，通过小刀翘一翘，可以慢慢翘开。
+ ![Q0.5塑料底壳和卡扣位置](/Document/Images/Q05_box_clip.jpeg)
+ 
 ### CH582固件刷入
 
 ```diff
