@@ -12,6 +12,11 @@ MS2131固件刷写方法参考下图
 
 ![1748863244916](https://github.com/user-attachments/assets/9ae80e82-8020-4d8e-81fa-6c7c9dea54b2)
 
+
+![1748865209211](https://github.com/user-attachments/assets/e92a5a75-3782-4e67-add3-54901135b2b0)
+![1748865309587](https://github.com/user-attachments/assets/17e5c566-0138-4223-be24-f7d8e6ef8ea5)
+
+
 @do21
 
 ---------------------------------------------------------------------------------------------
