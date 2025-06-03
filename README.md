@@ -1,14 +1,14 @@
 > [!TIP]
 > 由于无法在[原作者binnehot](https://github.com/binnehot/KVM_over_USB_Q05)那边提交commit和issue，我fork了一个repo备注自己发现的问题和解决办法，供后来者参考。
 
-【已知问题】
+【新增已知问题】
 
-5，如果主控机运行了向日葵远程控制软件，那么即使Q0.5刷好了MCU firmware，也会出现一个情况：视频无法调用，提示错误代码-1072875772。
+如果主控机运行了向日葵远程控制软件，那么即使Q0.5刷好了[ElluIFX](https://github.com/ElluIFX/)的[KVM-Card-Mini MCU firmware](https://github.com/ElluIFX/KVM-Card-Mini-PySide6/releases)，也会出现一个情况：视频无法调用，提示错误代码-1072875772。
 
 ![image](https://github.com/user-attachments/assets/132bc636-4271-4a75-b520-3bc3d59a366c)
 
-【经过分析后发现MS2131的设备名即使刷过MCU firmware，还是叫Oray Q0.5，接入主控PC后会第一时间被向日葵远程控制软件接管，有两个解决办法
-> 1. 提取MS2131固件，重新刷入时改一下设备名称；（我选择了这个方法一劳永逸，刷机软件用[这个](https://github.com/do21/KVM_over_USB_Q05/raw/refs/heads/patch-1/MS21XX&91XXDownloadTool_1.7.0_BUILD20221024.exe.zip)）
+【经过分析后发现这个问题跟MCU firmware没关系，是因为MS2131的设备名原厂叫Oray Q0.5，刷写MCU并不会改变MS2131的任何参数，因此接入主控PC后会第一时间会被向日葵远程控制软件接管独占（虽然实际上也无法触发向日葵Q0.5的调用icon，但就是被占了），有两个解决办法
+> 1. 提取MS2131固件，重新刷入改一下设备名称；（我选择了这个方法一劳永逸，刷机软件用[这个](https://github.com/do21/KVM_over_USB_Q05/raw/refs/heads/patch-1/MS21XX&91XXDownloadTool_1.7.0_BUILD20221024.exe.zip)）
 > 2. 退出向日葵远程控制软件。】
 
 MS2131固件刷写方法参考下图
