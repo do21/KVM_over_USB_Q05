@@ -1,4 +1,5 @@
-> 由于无法在原作者那边提交commit和issue，我fork了一个备注自己发现的问题和解决办法，供后来者参考。
+> [!TIP]
+> 由于无法在[原作者binnehot](https://github.com/binnehot/KVM_over_USB_Q05)那边提交commit和issue，我fork了一个repo备注自己发现的问题和解决办法，供后来者参考。
 
 【已知问题】
 
