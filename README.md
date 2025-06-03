@@ -2,7 +2,9 @@
 
 【已知问题】
 
-5，如果主控机运行了向日葵远程控制软件，那么即使Q0.5刷好了MCU firmware，也会出现一个情况：视频无法调用。
+5，如果主控机运行了向日葵远程控制软件，那么即使Q0.5刷好了MCU firmware，也会出现一个情况：视频无法调用，提示错误代码-1072875772。
+
+![image](https://github.com/user-attachments/assets/132bc636-4271-4a75-b520-3bc3d59a366c)
 
 【经过分析后发现MS2131的设备名即使刷过MCU firmware，还是叫Oray Q0.5，接入主控PC后会第一时间被向日葵远程控制软件接管，有两个解决办法
 > 1. 提取MS2131固件，重新刷入时改一下设备名称；（我选择了这个方法一劳永逸，刷机软件用[这个](https://github.com/do21/KVM_over_USB_Q05/raw/refs/heads/patch-1/MS21XX&91XXDownloadTool_1.7.0_BUILD20221024.exe.zip)）
